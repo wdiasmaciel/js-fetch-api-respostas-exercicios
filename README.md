@@ -1,1 +1,1 @@
-# js-fetch-api-respostas-exerc-cios
+# js-fetch-api-respostas-exercícios
