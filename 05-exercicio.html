@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fa031b;
+    }
+    #mensagem {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="excluirPost()">Excluir Post com ID 1</button>
+  <div id="mensagem"></div>
+
+  <script>
+    function excluirPost() {
+      fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'DELETE'
+      })
+      .then(() => {
+        document.getElementById('mensagem').textContent = 'Post excluído com sucesso!';
+      });
+    }
+  </script>
+</body>
+</html>
+

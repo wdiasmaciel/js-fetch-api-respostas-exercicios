@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 19rem;
+      margin: 1rem auto;
+    }
+    input, textarea, button {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 0.1rem solid #ccc;
+    }
+    #resposta {
+      margin-top: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <form id="form-post">
+    <input type="text" id="titulo" placeholder="Título" required />
+    <textarea id="corpo" placeholder="Corpo do post" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+  <div id="resposta"></div>
+
+  <script>
+    document.getElementById('form-post').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo').value;
+      const corpo = document.getElementById('corpo').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify({ title: titulo, body: corpo })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('resposta').textContent = `Post criado com ID: ${data.id}`;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    html, body {
+        font-size: 16px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    form, #resposta {
+      display: flex;
+      flex-direction: column;
+      max-width: 19rem;
+      margin: 1rem auto;
+    }
+    input, textarea, button {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 0.1rem solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <form id="form-put">
+    <input type="text" id="titulo" placeholder="Novo título" required />
+    <textarea id="corpo" placeholder="Novo corpo" required></textarea>
+    <button type="submit">Atualizar</button>
+  </form>
+  <div id="resposta"></div>
+
+  <script>
+    document.getElementById('form-put').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo').value;
+      const corpo = document.getElementById('corpo').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+        body: JSON.stringify({ id: 1, title: titulo, body: corpo })
+      })
+      .then(response => response.json())
+      .then(json => {
+        document.getElementById('resposta').innerHTML = `
+        <h1>Post atualizado:</h1> 
+        <p>ID: ${json.id}</p>
+        <p>Título: ${json.title}</p>
+        <p>Corpo: ${json.body}</p>`;
+      });
+    });
+  </script>
+</body>
+</html>
