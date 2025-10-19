@@ -27,9 +27,9 @@
       .then(response => response.json())
       .then(posts => {
         const lista = document.getElementById('lista-posts');
-        posts.forEach(post => {
+        posts.forEach((post, i) => {
           const li = document.createElement('li');
-          li.textContent = post.title;
+          li.textContent = `${i} - ${post.title}`;
           lista.appendChild(li);
         });
       });
